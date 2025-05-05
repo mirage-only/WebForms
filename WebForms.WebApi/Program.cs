@@ -28,7 +28,7 @@ builder.Services.AddScoped<UsersService>();
 var app = builder.Build();
 
 app.UseCors(builder => builder
-    .WithOrigins("https://web-forms-ui.vercel.app/")
+    .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
 
@@ -36,7 +36,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 //app.UseAuthorization();
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
