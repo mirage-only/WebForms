@@ -28,7 +28,7 @@ builder.Services.AddScoped<UsersService>();
 var app = builder.Build();
 
 app.UseCors(builder => builder
-    .AllowAnyOrigin()
+    .WithOrigins("https://web-forms-ui.vercel.app/")
     .AllowAnyMethod()
     .AllowAnyHeader());
 
