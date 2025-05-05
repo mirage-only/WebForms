@@ -13,7 +13,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(configuration.GetConnectionString(nameof(ApplicationDbContext)));
     });
 
+builder.Services.AddCors();
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
@@ -24,10 +27,16 @@ builder.Services.AddScoped<UsersService>();
 
 var app = builder.Build();
 
+app.UseCors(builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+//app.UseAuthorization();
+//app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
