@@ -15,13 +15,13 @@ public class UsersRepository(ApplicationDbContext dbContext) : IUsersRepository
             .OrderBy(user => user.Surname)
             .ToListAsync();
     }
-
-    /*public async Task<User?> GetUserById(ulong id)
+    
+    public async Task<User> GetUserByEmail(string email)
     {
         return await dbContext.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.Id == id);
-    }*/
+            .FirstOrDefaultAsync(user => user.Email == email);
+    }
 
     public async Task<User> Authorize(string email, string passwordHash)
     {

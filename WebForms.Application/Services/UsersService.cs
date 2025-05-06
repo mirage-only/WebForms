@@ -45,13 +45,22 @@ public class UsersService (IUsersRepository repository)
         {
             var user = UsersMapping.MapAddUserDtoToUser(addUserDto);
             
+            var email = addUserDto.Email;
+
+            var alreadyRegisteredUser = await repository.GetUserByEmail(email);
+
+            if (alreadyRegisteredUser != null)
+            {
+                throw new Exception("User with that email already registered");
+            }
+            
             var addedUserId = await repository.AddUser(user);
 
             return addedUserId;
         }
         catch (Exception e)
         {
-            throw new Exception("Add user failed", e);
+            throw new Exception(e.Message);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebForms.Application.DTOs;
 using WebForms.Application.Services;
@@ -32,7 +33,7 @@ public class UsersController(UsersService usersService) : ControllerBase
             return Problem(ex.Message);
         }
     }
-
+    
     [HttpPost("add")]
     public async Task<IActionResult> AddUser([FromBody] AddUserDto addUserDto)
     {
@@ -44,7 +45,7 @@ public class UsersController(UsersService usersService) : ControllerBase
         }
         catch (Exception e)
         {
-            throw new Exception("Error while adding user", e);
+            return Problem(e.Message);
         }
     }
     
