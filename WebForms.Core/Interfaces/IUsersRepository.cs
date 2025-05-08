@@ -6,7 +6,7 @@ public interface IUsersRepository
 {
     public Task<List<User>> GetAllUsers();
     
-    public Task<User> GetUserByEmail(string id);
+    public Task<User?> GetUserByEmail(string id);
     
     public Task<ulong> AddUser(User user);
     

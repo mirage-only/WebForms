@@ -6,7 +6,7 @@ namespace WebForms.Persistence;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
-    public DbSet<User?> Users { get; set; }
+    public DbSet<User> Users { get; set; }
     
     public DbSet<Template> Templates { get; set; }
     

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using WebForms.Core.Interfaces;
 using WebForms.Core.Models;
 
@@ -6,17 +7,15 @@ namespace WebForms.Persistence.Repositories;
 
 public class UsersRepository(ApplicationDbContext dbContext) : IUsersRepository
 {
-    private readonly ApplicationDbContext _dbContext = dbContext;
-
     public async Task<List<User>> GetAllUsers()
     {
-        return await _dbContext.Users
+        return await dbContext.Users
             .AsNoTracking()
             .OrderBy(user => user.Surname)
             .ToListAsync();
     }
     
-    public async Task<User> GetUserByEmail(string email)
+    public async Task<User?> GetUserByEmail(string email)
     {
         return await dbContext.Users
             .AsNoTracking()
@@ -25,7 +24,7 @@ public class UsersRepository(ApplicationDbContext dbContext) : IUsersRepository
 
     public async Task<User> Authorize(string email, string passwordHash)
     {
-        var user = _dbContext.Users
+        var user = dbContext.Users
             .AsNoTracking()
             .FirstOrDefaultAsync(user => user.Email == email && user.PasswordHash == passwordHash);
 

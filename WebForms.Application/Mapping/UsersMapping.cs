@@ -5,7 +5,7 @@ namespace WebForms.Application.Mapping;
 
 public class UsersMapping
 {
-    public static User MapAddUserDtoToUser(AddUserDto addUserDto)
+    public static User? MapAddUserDtoToUser(AddUserDto addUserDto)
     {
         return new User()
         {

@@ -10,5 +10,7 @@ public enum TopicEnum
     
     News,
     
-    IT
+    IT,
+    
+    Another
 }
